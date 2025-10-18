@@ -1,23 +1,37 @@
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import React from 'react';
+import React, { use } from 'react';
 import { NavLink } from 'react-router';
 import { auth } from '../../Firebase/Firebase.config';
+import { AuthContext } from '../../Contexts/AuthContext';
 
 const Register = () => {
+    const {createUser}=use(AuthContext);
     const handleOnSubmit=(event)=>{
         event.preventDefault();
-        const name=event.target.name.value;
         const email=event.target.email.value;
         const password=event.target.password.value;
-        console.log(name,email,password);
-          createUserWithEmailAndPassword(auth,email,password)
-           .then(result=>{
+        createUser(email,password)
+          .then(result=>{
             console.log(result.user)
-           }).catch(error=>{
+          })
+          .catch(error=>{
             console.log(error);
-           })
-         
+          })
     }
+    // const handleOnSubmit=(event)=>{
+    //     event.preventDefault();
+    //     const name=event.target.name.value;
+    //     const email=event.target.email.value;
+    //     const password=event.target.password.value;
+    //     console.log(name,email,password);
+    //       createUserWithEmailAndPassword(auth,email,password)
+    //        .then(result=>{
+    //         console.log(result.user)
+    //        }).catch(error=>{
+    //         console.log(error);
+    //        })
+         
+    // }
     return (
         <div className="hero bg-base-200 min-h-screen">
   <div className="hero-content flex-col lg:flex-row-reverse">
