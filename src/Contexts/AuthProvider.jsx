@@ -20,6 +20,7 @@ const AuthProvider = ({children}) => {
         return signOut(auth);
     }
     const signInWithGoogle=()=>{
+        setLoading(true);
        return  signInWithPopup(auth,googleProvider);
     }
     // current user information
